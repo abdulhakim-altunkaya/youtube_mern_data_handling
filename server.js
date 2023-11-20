@@ -36,6 +36,16 @@ app.get("/api/reqquery", (req, res) => {
     res.status(500).json({myerror: error.message});
   }
 })
+app.get("/api/reqparams/:frontenddata", (req, res) => {
+  try {
+    let {frontenddata} = req.paramsS;
+    console.log(frontenddata);
+    res.status(200).json({mymessage: `hey, your req.params is successful: ${frontenddata}`});
+  } catch (error) {
+    res.status(500).json({myerror: `Server Side Error = ${error.message}`});
+  }
+})
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
@@ -57,6 +67,11 @@ app.get('*', (req, res) => {
 //also remove "build" entry from client .gitignore
 //also you'll need to enter .env connection string as an environment variable in your platform
 //also make sure you are using relative paths in your react components for server.js routes
+
+SOME EASY ERRORS
+Make sure you have req and res here: "....(req, res) => { ..."
+Change "app.get" to "app.post" if requests fail, especially in req.query
+
 */
 
 

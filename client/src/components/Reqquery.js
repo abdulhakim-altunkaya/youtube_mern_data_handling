@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from "axios";
 
 
-function Reqquery() {
+function Reqquery() { 
 
   let [inputValue, setInputValue] = useState("");
   let [serverData, setServerData] = useState("");
