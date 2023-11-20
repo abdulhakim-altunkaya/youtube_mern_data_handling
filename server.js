@@ -16,6 +16,16 @@ app.use(cors());
 /* ROUTES */
 app.get("/test", (req, res) => {
     res.json({mymessage: "hey from server"});
+});
+
+app.post("/reqbody", (req, res) => {
+  try {
+    const {frontenddata} = req.body;
+    console.log(frontenddata);
+    res.status(200).json({mymessage: `hey, your req.body is successful: ${frontenddata}`});
+  } catch (error) {
+    res.status(500).json({myerror: error.message});
+  }
 })
 
 const PORT = process.env.PORT || 5000;

@@ -6,8 +6,7 @@ function Main() {
 
     const getData = async () => {
         const response = await axios.get("http://localhost:5000/test");
-        setServerData(response.data.mymessage);
-        
+        setServerData(response.data.mymessage); 
     }
 
     return (
