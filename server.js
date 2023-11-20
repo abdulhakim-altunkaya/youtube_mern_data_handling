@@ -18,11 +18,20 @@ app.get("/test", (req, res) => {
     res.json({mymessage: "hey from server"});
 });
 
-app.post("/reqbody", (req, res) => {
+app.post("/api/reqbody", (req, res) => {
   try {
     const {frontenddata} = req.body;
     console.log(frontenddata);
     res.status(200).json({mymessage: `hey, your req.body is successful: ${frontenddata}`});
+  } catch (error) {
+    res.status(500).json({myerror: error.message});
+  }
+})
+app.get("/api/reqquery", (req, res) => {
+  try {
+    let frontenddata = req.query.word;
+    console.log(frontenddata);
+    res.status(200).json({mymessage: `hey, your req.query is successful: ${frontenddata}`});
   } catch (error) {
     res.status(500).json({myerror: error.message});
   }
@@ -49,17 +58,5 @@ app.get('*', (req, res) => {
 //also you'll need to enter .env connection string as an environment variable in your platform
 //also make sure you are using relative paths in your react components for server.js routes
 */
-
-app.post("/writetodatabase", async (req, res) => {
-  try {
-    const {content} = req.body;
-    const newData = new DataModel({ content });
-    await newData.save();
-    res.json({message: "Data saved successfully / Данные сохранены"})
-  } catch (error) {
-    console.log("Ошибка сервера при сохранении данных", error.message);
-    res.status(500).send("Server error while saving data/Ошибка сервера при сохранении данных")
-  }
-})
 
 
